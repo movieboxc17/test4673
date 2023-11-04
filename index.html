@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Random Flashing Images</title>
+    <style>
+        body {
+            margin: 0;
+            overflow: hidden;
+        }
+        img {
+            position: absolute;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <script>
+        // Array of image URLs
+        const imageUrls = [
+            'image1.jpg',
+            'image2.jpg',
+            'image3.jpg',
+            // Add more image URLs here
+        ];
+
+        // Function to generate a random number within a range
+        function getRandomNumber(min, max) {
+            return Math.floor(Math.random() * (max - min + 1)) + min;
+        }
+
+        // Function to display a random image at a random position
+        function displayRandomImage() {
+            const imageUrl = imageUrls[getRandomNumber(0, imageUrls.length - 1)];
+            const image = new Image();
+            image.src = imageUrl;
+            const x = getRandomNumber(0, window.innerWidth - 200);
+            const y = getRandomNumber(0, window.innerHeight - 200);
+
+            image.style.left = x + 'px';
+            image.style.top = y + 'px';
+            image.style.width = '200px';
+            image.style.height = '200px';
+            image.style.position = 'absolute';
+            image.style.display = 'block';
+
+            document.body.appendChild(image);
+
+            // Remove the image after a certain duration (e.g., 2 seconds)
+            setTimeout(() => {
+                document.body.removeChild(image);
+            }, 2000);
+        }
+
+        // Call the function to display random images at an interval (e.g., every 1 second)
+        setInterval(displayRandomImage, 1000);
+    </script>
+</body>
+</html>
